@@ -2,7 +2,7 @@
 It is a webapp for foreign students to live in Russia. It's just a pocket dictionary which can help you. 
 
 # Deploying the project
-The project is deployed on [Heroku](https://murmuring-lowlands-42299.herokuapp.com/):https://murmuring-lowlands-42299.herokuapp.com/
+The project is deployed on [Heroku](https://murmuring-lowlands-42299.herokuapp.com/): https://murmuring-lowlands-42299.herokuapp.com/
 ## 1. install python 3.9
 A good tutorial is available [here](https://linuxize.com/post/how-to-install-python-3-9-on-ubuntu-20-04/)
 ## 2. Clone the project
