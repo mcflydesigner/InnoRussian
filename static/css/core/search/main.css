@@ -1,0 +1,43 @@
+#main ul {
+    margin-top: 10px;
+}
+
+#main li.block {
+    margin: 6rem 0;
+}
+
+#main li.block:first-child {
+    margin: 0 0 2rem 0;
+}
+
+#main .searched_question {
+    padding: 0 0 1.5rem 0;
+    color: gray;
+    font-style: italic;
+}
+
+#main .header {
+    margin: 0 0 1rem 0;
+}
+
+#main .search_unsuccess img {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    width: 8rem;
+}
+
+#main .search_unsuccess h5 {
+    color: gray;
+    font-weight: normal;
+}
+
+@media screen and (max-width: 350px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .item-list .item h3 {
+        font-size: 1.8rem;
+    }
+}
+

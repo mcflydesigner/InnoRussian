@@ -1,0 +1,69 @@
+{# Base template for all apps #}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="InnoRussian is a way for foreign students to communicate with Russian environment.">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+
+    <title>
+        {% block title %}
+        {% endblock %}
+        - {{ PROJECT_NAME }}
+    </title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/general/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/general/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general/template.css' %}">
+
+    {% block styles %}
+    {% endblock %}
+</head>
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+{% include 'core/_messages.html' %}
+
+{% block bases_content %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+<!-- Default scripts -->
+<!-- jQuery -->
+<script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
+
+<!-- Bootstrap -->
+<script src="{% static 'js/popper.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<!-- Plugins -->
+<script src="{% static 'js/scrollreveal.min.js' %}"></script>
+<script src="{% static 'js/waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'js/imgfix.min.js' %}"></script>
+
+<!-- Global Init -->
+<script src="{% static 'js/custom.js' %}"></script>
+
+<!-- Block for additional scripts -->
+{% block scripts %}
+{% endblock %}
+
+</body>
+</html>

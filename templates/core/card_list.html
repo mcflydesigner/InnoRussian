@@ -1,0 +1,68 @@
+{# List of cards template #}
+
+{% extends 'core/core_base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ subCategoryName }}
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/item-list-grid-line.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/paginator.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/card/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/sorting-dropdown.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/search-field.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id="main">
+
+        <div class="container">
+            {% include 'core/_search_form.html' %}
+
+            {% if cards %}
+                {% include 'core/_sort_by_form.html' %}
+
+                <div class="item-list-line">
+
+                    {% for card in cards %}
+                        {% include 'core/_card.html' with typeOfActionDelete='del' %}
+                    {% endfor %}
+
+                </div>
+
+                {% include 'core/_paginator.html' %}
+            {% elif q %}
+                <div class="error-empty-list">
+                    {% include 'core/_error_empty_list.html' %}
+
+                    <div class="links">
+                        <a class="btn"
+                       href="{% url 'core:card-list' subcat_id %}">Back to the cards</a>
+                        <a class="btn btn-search-global"
+                           href="{% url 'core:search' %}?q={{ q }}">Global search</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    </section>
+{% endblock %}
+
+{% if user.is_authenticated %}
+    {% block scripts %}
+        <script src="{% static 'js/core/card/card-handler.js' %}"></script>
+        <script type="text/javascript">
+            //Handling adding to favourites / remove from favourites buttons
+            $(document).ready(function () {
+                c = new CardClickHandler({
+                    element: $("#main .item-list-line"),
+                    image_add: "{% static 'images/core/card/plus.svg' %}",
+                    image_del: "{% static 'images/core/card/remove.svg' %}",
+                    image_star: "{% static 'images/core/card/star.svg' %}"
+                });
+            });
+        </script>
+    {% endblock %}
+{% endif %}

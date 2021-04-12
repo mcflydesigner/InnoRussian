@@ -1,0 +1,64 @@
+{# Template of navigation #}
+
+{% load static %}
+
+{# To define active page(for styling) #}
+{% url 'core:category-list' as core_cat %}
+{% url 'core:favourite' as core_favour %}
+{% url 'user:logout' as user_logout %}
+{% url 'user:sign-in' as user_sign_in %}
+{% url 'user:sign-up' as user_sign_up %}
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <nav class="main-nav">
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li>
+                            <a href="{{ core_cat }}"
+                               class="{% if request.path == core_cat %}active{% endif %}">
+                                Phrasebook</a>
+                        </li>
+
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{{ core_favour }}"
+                                   class="{% if request.path == core_favour %}active{% endif %}">
+                                    Favourites</a>
+                            </li>
+                            <li>
+                                <a href="{{ user_logout }}"
+                                   class="{% if request.path == user_logout %}active{% endif %}">
+                                    Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ user_sign_in }}"
+                                   class="{% if request.path == user_sign_in %}active{% endif %}">
+                                    Sign in</a>
+                            </li>
+                            <li>
+                                <a href="{{ user_sign_up }}"
+                                   class="{% if request.path == user_sign_up %}active{% endif %}">
+                                    Sign up</a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+
+            </div>
+        </div>
+    </div>
+
+</header>
+<!-- ***** Header Area End ***** -->

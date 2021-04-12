@@ -1,0 +1,37 @@
+.sorting-dropdown-block {
+    margin-bottom: 6px;
+}
+
+.text-sorted {
+    margin-bottom: 3px;
+}
+
+.sorting-a {
+    border: 1px solid #495057;
+    color: #495057;
+}
+
+.sorting-a:focus {
+    box-shadow: none;
+}
+
+.sorting-a:hover {
+    border: 1px solid black;
+    color: black;
+    transition: all 0.3s;
+}
+
+
+
+.dropdown-menu {
+    padding: 0;
+}
+
+.dropdown-menu .dropdown-item {
+    border-bottom: 1px solid #E8E8E7;
+    padding: .5rem 1.5rem;
+}
+
+.dropdown-menu ul li:last-child .dropdown-item {
+    border-bottom: none;
+}

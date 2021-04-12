@@ -1,0 +1,1 @@
+web: gunicorn djangoIR.wsgi --log-file -

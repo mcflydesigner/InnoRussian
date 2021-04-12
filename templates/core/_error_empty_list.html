@@ -1,0 +1,9 @@
+{# No data in list to show template #}
+
+{% load static %}
+
+<div class="data">
+    <img src="{% static 'images/core/general/empty.svg' %}"
+         alt="Empty image">
+    <h2>Sorry, no results for "{{ q }}"</h2>
+</div>

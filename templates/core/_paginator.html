@@ -1,0 +1,33 @@
+{# Template for django pagination #}
+
+{% load core_tags %}
+
+<div class="pagination">
+
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?{% url_replace page=page_obj.previous_page_number %}"
+            >{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+
+        <span class="current">
+            <a class="active"
+               href="?{% url_replace page=page_obj.number %}">{{ page_obj.number }}</a>
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+            {% if page_obj.number == 1 and page_obj.paginator.num_pages >= 3 %}
+                <a href="?{% url_replace page=page_obj.number|add:2 %}">{{ page_obj.number|add:2 }}</a>
+            {% endif %}
+        {% endif %}
+
+{#        {% if page_obj.paginator.num_pages > 2 %}#}
+{#            <div class="first-last">#}
+{#                <a href="?page=1">First page</a>#}
+{#                <a href="?page={{ page_obj.paginator.num_pages }}">Last page</a>#}
+{#            </div>#}
+{#        {% endif %}#}
+    </span>
+
+</div>

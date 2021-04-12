@@ -1,0 +1,121 @@
+{# Template of page with searches among categories, subcategories and cards #}
+
+{% extends 'core/core_base.html' %}
+{% load static %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/item-list-grid-line.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/item-list-grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/category/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/card/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/search/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/sorting-dropdown.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/search-field.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id="main">
+
+        <div class="container">
+            {% include 'core/_search_form.html' %}
+
+            <!-- Header for the given search -->
+            <div class="searched_question">
+                I hope that I've found something for "{{ q }}"...
+            </div>
+
+            {% include 'core/_sort_by_form.html' %}
+
+            <ul>
+                <!-- Initially, show all blocks with data for default sorting -->
+                {% for block in q_found %}
+                    <li class="block">
+                        <div class="header">
+                            <h1>{{ block.1 }}:</h1>
+                        </div>
+
+                        {% if block.0 == 'CT' %}
+                            <!-- Categories -->
+                            <div class="item-list">
+                                {% for cat in categories %}
+                                    <div class="item">
+                                        <a href="{% url 'core:subcategory-list' cat.id %}">
+                                            <img src="{{ cat.picture.url }}" alt="{{ cat.name }} picture">
+                                            <h3>{{ cat.name }}</h3>
+                                        </a>
+                                    </div>
+                                {% empty %}
+                                    {% include 'core/_search_unsuccess.html' %}
+                                {% endfor %}
+                            </div>
+                            <!-- End categories -->
+
+                        {% elif block.0 == 'SB' %}
+                            <!-- Subcategories -->
+                            <div class="item-list">
+                                {% for subcat in subcategories %}
+                                    <div class="item">
+                                        <a href="{% url 'core:subcategory-list' subcat.id %}">
+                                            <img src="{{ subcat.picture.url }}" alt="{{ subcat.name }} picture">
+                                            <h3>{{ subcat.name }}</h3>
+                                        </a>
+                                    </div>
+                                {% empty %}
+                                    {% include 'core/_search_unsuccess.html' %}
+                                {% endfor %}
+                            </div>
+                            <!-- End subcategories -->
+
+                        {% elif block.0 == 'CR' %}
+                            <!-- Cards -->
+                            <div class="item-list-line">
+
+                                {% for card in cards %}
+                                    {% include 'core/_card.html' with typeOfActionDelete='del' %}
+                                {% empty %}
+                                    {% include 'core/_search_unsuccess.html' %}
+                                {% endfor %}
+
+                            </div>
+                            <!-- End cards -->
+                        {% endif %}
+                    </li>
+                {% endfor %}
+
+                <!-- Show all remaining sections for which we couldn't find data -->
+                {% for block in q_notfound %}
+                    <li class="block">
+                        <div class="header">
+                            <h1>{{ block.1 }}:</h1>
+                        </div>
+
+                        {% include 'core/_search_unsuccess.html' %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </section>
+{% endblock %}
+
+{% if user.is_authenticated %}
+    {% block scripts %}
+        <script src="{% static 'js/core/card/card-handler.js' %}"></script>
+        <script type="text/javascript">
+            //Handling adding to favourites / remove from favourites buttons
+            $(document).ready(function () {
+                c = new CardClickHandler({
+                    element: $("#main .item-list-line"),
+                    image_add: "{% static 'images/core/card/plus.svg' %}",
+                    image_del: "{% static 'images/core/card/remove.svg' %}",
+                    image_star: "{% static 'images/core/card/star.svg' %}"
+                });
+            });
+        </script>
+    {% endblock %}
+{% endif %}

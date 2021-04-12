@@ -1,0 +1,25 @@
+.item-list-line {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-list-line .item {
+    position: relative;
+    margin: 1rem 0;
+    padding: 4rem 2rem 4rem 3rem;
+
+    text-align: left;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    word-break: break-all;
+    transition: all 1s;
+}
+
+
+@media screen and (max-width: 440px){
+    .item-list-line .item {
+        padding: 2rem 1.5rem;
+    }
+}

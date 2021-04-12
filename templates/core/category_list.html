@@ -1,0 +1,60 @@
+{# List of categories template #}
+
+{% extends 'core/core_base.html' %}
+{% load static %}
+
+{% block title %}
+    Phrasebook
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/item-list-grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/paginator.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/category/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/search-field-loc-glb.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id="main">
+
+        <div class="container">
+            {% include 'core/_search_loc_glb_form.html' %}
+
+            {% if categories %}
+                <div class="item-list">
+
+                    {% for cat in categories %}
+                        <div class="item">
+                            <a href="{% url 'core:subcategory-list' cat.id %}">
+                                <img src="{{ cat.picture.url }}" alt="{{ cat.name }} picture">
+                                <h3>{{ cat.name }}</h3>
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                {% include 'core/_paginator.html' %}
+            {% elif q %}
+                <div class="error-empty-list">
+                    {% include 'core/_error_empty_list.html' %}
+
+                    <div class="links">
+                        <a class="btn"
+                           href="{% url 'core:category-list' %}">Back to all categories</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/core/general/search.js' %}"></script>
+    <script type="text/javascript">
+        //Handling search form with radio button "Local / Global" search
+        let searchForm = new SearchForm('local-global-search', '{% url 'core:search' %}');
+    </script>
+{% endblock %}
+

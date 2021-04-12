@@ -1,0 +1,91 @@
+.item-list-line .item{
+    border: 5px solid #ffffff;
+}
+
+.item-list-line .item:hover {
+    background: #F7F7F7;
+    border: 5px solid #F7F7F7;
+    transition: all 0.3s;
+}
+
+.item-list-line .item .card_elem {
+    display: flex;
+    flex-direction: row;
+}
+
+.item-list-line .item .left-part {
+    flex: 1;
+}
+
+.item-list-line .item .right-part {
+    padding-left: 0.8rem;
+}
+
+
+.item-list-line .item .left-part img.star{
+    width: 2rem;
+    padding-bottom: 0.5rem;
+    animation: appearance;
+    animation-duration: 1s;
+}
+
+.item-list-line .item .left-part .notes, .item-list-line .item .left-part .translit{
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #D9DDDC;
+    color: gray;
+}
+
+.item-list-line .item .left-part .translit {
+    font-style: italic;
+}
+
+
+.border-gold {
+    transition: 1s linear all;
+}
+
+
+.item-list-line .item .right-part ul li {
+    padding: 0.6rem 1rem 0 0;
+}
+
+.item-list-line .item .right-part ul li:first-child {
+    padding-top: 0;
+}
+
+.item-list-line .item .right-part button {
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.item-list-line .item .right-part button:focus {
+    outline: none;
+}
+
+.item-list-line .item .right-part img {
+    width: 2.5rem;
+}
+
+.item-list-line .item .right-part p {
+    font-weight: 300;
+    margin: 0.2rem 0 0.1rem 0;
+    padding: 0;
+}
+
+
+
+
+
+@keyframes appearance {
+  from { opacity: 0;}
+  to { opacity: 1; }
+}
+
+
+@media screen and (max-width: 440px){
+    .item-list-line .item .right-part ul li {
+        padding: 0.5rem 0 0 0;
+    }
+}

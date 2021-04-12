@@ -1,0 +1,51 @@
+{# List of subcategories template #}
+
+{% extends 'core/core_base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ categoryName }}
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/item-list-grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/paginator.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core/general/search-field.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id="main">
+
+        <div class="container">
+            {% include 'core/_search_form.html' %}
+
+            {% if subcategories %}
+                <div class="item-list">
+                    {% for subcat in subcategories %}
+                        <div class="item">
+                            <a href="{% url 'core:card-list' subcat.id %}">
+                                <img src="{{ subcat.picture.url }}" alt="{{ subcat.name }} picture">
+                                <h3>{{ subcat.name }}</h3>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% include 'core/_paginator.html' %}
+            {% elif q %}
+                <div class="error-empty-list">
+                    {% include 'core/_error_empty_list.html' %}
+                    <div class="links">
+                        <a class="btn"
+                           href="{% url 'core:subcategory-list' cat_id %}">Back to the subcategory</a>
+                        <a class="btn btn-search-global"
+                           href="{% url 'core:search' %}?q={{ q }}">Global search</a>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+
+    </section>
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{# Template for widget to sort the data #}
+
+{% load core_tags %}
+
+<div class="dropdown show sorting-dropdown-block">
+
+    <p class="text-sorted">Sorted by</p>
+    <!-- Chosen option for sorting -->
+    <a class="btn sorting-a dropdown-toggle" href="#"
+       role="button" id="dropdownMenuLink" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        {{ sorted_by.1 }}
+    </a>
+
+    <!-- Remaining options for sorting(in dropdown list) -->
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <ul>
+
+            {% for sorting_opt in sort_options %}
+                {% if sorted_by.0 != sorting_opt.0 %}
+                    <li>
+                        <a class="dropdown-item"
+                           href="?{% url_replace sort=sorting_opt.0 %}">{{ sorting_opt.1 }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
+
+</div>

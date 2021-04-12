@@ -1,0 +1,28 @@
+{# Form for local / global search #}
+
+{% load static %}
+
+<div class="search-field">
+
+    <form action="#" method="GET" id="local-global-search">
+        <div class="input-group">
+            <input type="text" class="form-control" name="q"
+                   value="{{ q|default:"" }}"
+                   placeholder="{{ searchPlaceholder|default:'Something interesting?' }}"
+                   aria-label="Something interesting?"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn" type="submit">Search</button>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input class="checkbox" id="where-to-search" type="checkbox"/>
+            <label for="where-to-search" class="checkbox-label">
+                <span class="global">Global search</span>
+                <span class="local">Local search</span>
+            </label>
+        </div>
+    </form>
+
+</div>

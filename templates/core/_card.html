@@ -1,0 +1,76 @@
+{# Card template #}
+
+{% load static %}
+
+<div class="item {{ card.favourite|yesno:'border-gold,' }}">
+    <div class="card_elem">
+
+        <div class="left-part">
+            {% if user.is_authenticated and card.favourite %}
+                <div class="star_img">
+                    <img class="star"
+                         src="{% static 'images/core/card/star.svg' %}"
+                         alt="Star image">
+                </div>
+            {% endif %}
+
+            <div class="content">{{ card.content|safe }}</div>
+
+            {# The function for adding notes is disabled, no need #}
+            {#                                {% if card.notes %}#}
+            {#                                    <div class="notes">#}
+            {#                                        <h6>Notes:</h6>#}
+            {#                                        <p>{{ card.notes }}</p>#}
+            {#                                    </div>#}
+            {#                                {% endif %}#}
+
+            {% if card.translit_of_pronunciation %}
+                <div class="translit">
+                    {{ card.translit_of_pronunciation }}
+                </div>
+            {% endif %}
+        </div>
+
+
+        <div class="right-part">
+            <ul>
+
+                {% if card.pronunciation %}
+                    <li>
+                        <div class="pronunciation">
+                            <audio id="audio_{{ card.id }}" src="{{ card.pronunciation.url }}"
+                                   preload="none"></audio>
+                            <button onclick="$('#audio_{{ card.id }}').get(0).play()">
+                                <img src="{% static 'images/core/card/voice.svg' %}"
+                                     alt="Image play"/>
+                            </button>
+                        </div>
+                    </li>
+                {% endif %}
+                <li>
+                    {% if user.is_authenticated %}
+
+                        {% if card.favourite %}
+                            <button data-action="{{ typeOfActionDelete }}"
+                                    data-url="{% url 'core:favourite-del' card.id %}"
+                                    class="favourite_button">
+                                <img src="{% static 'images/core/card/remove.svg' %}"
+                                     alt="Delete icon">
+                            </button>
+                        {% else %}
+                            <button data-action="add"
+                                    data-url="{% url 'core:favourite-add' card.id %}"
+                                    class="favourite_button">
+                                <img src="{% static 'images/core/card/plus.svg' %}"
+                                     alt="Add icon">
+                            </button>
+                        {% endif %}
+
+                    {% endif %}
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</div>
