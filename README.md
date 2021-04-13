@@ -1,5 +1,5 @@
 # InnoRussian
-It is a webapp for foreign students to live in Russia. It's just a pocket dictionary which can help you. 
+It is a Django webapp for foreign students to live in Russia. It's just a pocket dictionary which can help you. 
 
 # Deploying the project
 The project is deployed on [Heroku](https://murmuring-lowlands-42299.herokuapp.com/): https://murmuring-lowlands-42299.herokuapp.com/
